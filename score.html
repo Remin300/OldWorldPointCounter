@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Licznik Punktów</title>
+    <!-- Importowanie Bootstrap przez CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Warhammer Old World - points counter</h1>
+        <hr class="mt-2" />
+        <h2 class="text-center mt-2" id="scenarioDisplay"></h2>
+        <hr class="mt-2" />
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="d-flex align-items-center">
+                    <label for="player1Points" id="ptsNamePlayer1" class="form-label me-2"></label>
+                    <div class="form-control-plaintext" id="player1Points">0</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="d-flex align-items-center">
+                    <label for="player2Points" id="ptsNamePlayer2" class="form-label me-2"></label>
+                    <div class="form-control-plaintext" id="player2Points">0</div>
+                </div>
+            </div>
+        </div>
+        <hr class="mt-2" />
+
+        <div class="row">
+            <!-- Nowy wiersz dla form -->
+            <form id="player1Form" class="col-md-6 p-4 bg-white rounded shadow">
+                <h3 id="player1Display"></h3>
+
+                <div class="d-flex align-items-center mb-2">
+                    <label class="form-label me-2" for="GeneralSlainPlayer1">General slain</label>
+                    <input type="checkbox" id="GeneralSlainPlayer1" onchange="updatePoints()">
+                </div>
+
+                <div class="d-flex align-items-center mb-2">
+                    <label class="form-label me-2" for="BsbPlayer1">
+                        Battle Standard Bearer (slain, has fled or fleeing)
+                    </label>
+                    <input type="checkbox" id="BsbPlayer1" onchange="updatePoints()">
+                </div>
+
+                <div class="d-flex align-items-center mb-2">
+                    <label class="form-label me-2" for="StandardsPlayer1">Number of standards lost</label>
+                    <input type="number" id="StandardsPlayer1" class="form-control w-25" required oninput="updatePoints()">
+                </div>
+
+                <hr class="mt-2" />
+
+                <div id="player1Units" class="mt-3"></div>
+                <button type="button" class="btn btn-link" onclick="addUnit('player1')">
+                    <i class="bi bi-plus-square-fill" style="font-size: 2rem; color: black;"></i>
+                </button>
+            </form>
+
+            <form id="player2Form" class="col-md-6 p-4 bg-white rounded shadow">
+                <h3 id="player2Display"></h3>
+
+                <div class="d-flex align-items-center mb-2">
+                    <label class="form-label me-2" for="GeneralSlainPlayer2">General slain</label>
+                    <input type="checkbox" id="GeneralSlainPlayer2" onchange="updatePoints()">
+                </div>
+
+                <div class="d-flex align-items-center mb-2">
+                    <label class="form-label me-2" for="BsbPlayer2">Battle Standard Bearer (slain, has fled or fleeing)</label>
+                    <input type="checkbox" id="BsbPlayer2" onchange="updatePoints()">
+                </div>
+
+                <div class="d-flex align-items-center mb-2">
+                    <label class="form-label me-2" for="StandardsPlayer2">Number of standards lost</label>
+                    <input type="number" id="StandardsPlayer2" class="form-control w-25" required oninput="updatePoints()">
+                </div>
+
+                <hr class="mt-2" />
+
+                <div id="player2Units" class="mt-3"></div>
+                <button type="button" class="btn btn-link" onclick="addUnit('player2')">
+                    <i class="bi bi-plus-square-fill" style="font-size: 2rem; color: black;"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Skrypt do dodawania jednostek -->
+    <script>
+        window.onload = function () {
+            // Pobieranie danych z Local Storage
+            const player1Name = localStorage.getItem("player1");
+            const player2Name = localStorage.getItem("player2");
+            const scenario = localStorage.getItem("scenario");
+
+            // Wyświetlanie danych na stronie
+            document.getElementById("player1Display").textContent = player1Name;
+            document.getElementById("player2Display").textContent = player2Name;
+            document.getElementById("scenarioDisplay").textContent = "Scenario: " + scenario;
+
+            document.getElementById("ptsNamePlayer1").textContent = player1Name + " (Pts): ";
+            document.getElementById("ptsNamePlayer2").textContent = player2Name + " (Pts): ";
+        };
+
+        function addUnit(player) {
+            const unitsDiv = document.getElementById(player + 'Units');
+            const unitDiv = document.createElement('div');
+            unitDiv.classList.add('row', 'mb-2'); // Dodanie klas Bootstrap dla wiersza
+
+            // Tworzenie formularza dla jednostki
+            unitDiv.innerHTML = `
+                    <div class="col-md-1 text-center">
+                        <button type="button" class="btn btn-link" onclick="removeUnit(this)"><i class="bi bi-trash3-fill" style="color: black;"></i></button>
+                    </div>
+                    <div class="col-md-5">
+                        <input type="text" class="form-control unit-name" placeholder="Unit name" required>
+                    </div>
+                    <div class="col-md-2">
+                        <input type="number" class="form-control unit-points" placeholder="Pts" required>
+                    </div>
+                    <div class="col-md-4">
+                        <select class="form-select unit-state" onchange="updatePoints()">
+                            <option value="" hidden>Unit state</option>
+                            <option value="destroyed">Destroyed</option>
+                            <option value="fleeing">Fleeing</option>
+                            <option value="25%">25% Str</option>
+                        </select>
+                    </div>
+                    <hr class="mt-3" />
+                `;
+
+            unitsDiv.appendChild(unitDiv);
+        }
+
+        function updatePoints() {
+            let player1TotalPoints = 0;
+            let player2TotalPoints = 0;
+
+            // Zliczanie punktów dla Gracza 1
+            const player1Units = document.getElementById('player1Units').getElementsByClassName('row');
+            for (let unit of player1Units) {
+                const pointsInput = unit.querySelector('.unit-points');
+                const stateSelect = unit.querySelector('.unit-state');
+
+                const points = parseInt(pointsInput.value) || 0;
+
+                if (stateSelect.value === 'destroyed') {
+                    player2TotalPoints += points;
+                } else if (stateSelect.value === 'fleeing') {
+                    player2TotalPoints += points * 0.5;
+                } else if (stateSelect.value === '25%') {
+                    player2TotalPoints += points * 0.25;
+                }
+            }
+
+            const player1General = document.getElementById('GeneralSlainPlayer1');
+            if (player1General.checked) {
+                player2TotalPoints += 100;
+            }
+
+            const player1Bsb = document.getElementById('BsbPlayer1');
+            if (player1Bsb.checked) {
+                player2TotalPoints += 50;
+            }
+
+            const StandardsPlayer1 = document.getElementById('StandardsPlayer1');
+            const standardsPlayer1Value = parseInt(StandardsPlayer1.value) || 0;
+            player2TotalPoints += standardsPlayer1Value * 50;
+
+
+            // Zliczanie punktów dla Gracza 2
+            const player2Units = document.getElementById('player2Units').getElementsByClassName('row');
+            for (let unit of player2Units) {
+                const pointsInput = unit.querySelector('.unit-points');
+                const stateSelect = unit.querySelector('.unit-state');
+
+                const points = parseInt(pointsInput.value) || 0;
+
+                if (stateSelect.value === 'destroyed') {
+                    player1TotalPoints += points;
+                } else if (stateSelect.value === 'fleeing') {
+                    player1TotalPoints += points * 0.5;
+                } else if (stateSelect.value === '25%') {
+                    player1TotalPoints += points * 0.25;
+                }
+            }
+
+            const player2General = document.getElementById('GeneralSlainPlayer2');
+            if (player2General.checked) {
+                player1TotalPoints += 100;
+            }
+
+            const player2Bsb = document.getElementById('BsbPlayer2');
+            if (player2Bsb.checked) {
+                player1TotalPoints += 50;
+            }
+
+            const StandardsPlayer2 = document.getElementById('StandardsPlayer2');
+            const standardsPlayer2Value = parseInt(StandardsPlayer2.value) || 0;
+            player1TotalPoints += standardsPlayer2Value * 50;
+
+
+            // Uaktualnienie punktów w UI
+            document.getElementById('player1Points').innerText = player1TotalPoints;
+            document.getElementById('player2Points').innerText = player2TotalPoints;
+        }
+
+        function removeUnit(button) {
+            // Usuwanie jednostki
+            const unitDiv = button.closest('.row'); // Znajduje rodzica, czyli div z klasą row
+            unitDiv.remove(); // Usuwa element
+            updatePoints(); // Uaktualnij punkty po usunięciu jednostki
+        }
+    </script>
+
+    <!-- Importowanie skryptów Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

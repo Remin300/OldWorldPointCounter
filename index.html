@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ustawienia Gry</title>
+
+    <!-- Importowanie Bootstrap przez CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css">
+
+</head>
+<body class="bg-light">
+
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Warhammer Old World - points counter </h1>
+
+        <div class="row justify-content-center">
+            <form id="setupForm" class="col-md-4 col-lg-4 p-4 bg-white rounded shadow">
+                <!-- Sekcja dla Graczy -->
+                <div class="form-group">
+                    <label for="player1Name">General 1:</label>
+                    <input type="text" id="player1Name" class="form-control" placeholder="Wprowadź imię Gracza 1" required value="You">
+                </div>
+
+                <div class="form-group">
+                    <label for="player2Name">General 2:</label>
+                    <input type="text" id="player2Name" class="form-control" placeholder="Wprowadź imię Gracza 2" required value="Your Enemy">
+                </div>
+
+                <!-- Wybór Scenariusza -->
+                <div class="form-group">
+                    <label for="scenario">scenario:</label>
+                    <select id="scenario" class="form-control" required onchange="updateScenario()">
+                        <option value="" hidden>Choose a scenario</option>
+                        <option value="Scenario1">The Plains of L’anguille</option>
+                        <option value="Scenario2">The doom of Odo Todmeyer III</option>
+                        <option value="Scenario3">The battle of Pine Crags</option>
+                    </select>                  
+                    <div class="text-center">
+                        <button type="button" id="modalButton" class="btn btn-link" data-toggle="modal" data-target="">
+                            <i class="bi bi-eye-fill" style="font-size: 2rem; color: black;"></i> <!-- Możesz dostosować rozmiar ikony -->
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Obrazek dla scenariusza -->
+                <img id="scenarioImage" src="" alt="Scenariusz" class="img-fluid mt-3" style="display: none;">
+
+                <!-- Przycisk zapisu -->
+                <div class="d-flex justify-content-center">
+                    <button type="button" class="btn btn-secondary mt-3" onclick="saveGameSetup()">Start the battle</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal dla The Plains of L’anguille -->
+    <div class="modal fade" id="Scenario1Modal" tabindex="-1" aria-labelledby="scenario1ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="scenario1ModalLabel">The Plains of L’anguille</h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <h6>Set-up</h6>
+                    <p>
+                        Place terrain as described in The Old World Rulebook (page 268).
+                    </p>
+
+                    <h6>Deployment</h6>
+                    <p>
+                        Once the battlefield has been set up, the winner of a roll-off
+                        chooses which player will deploy the first unit. The winner
+                        of this roll-off must also choose their deployment zone (A or
+                        B), as shown on the map opposite. Players deploy their armies
+                        using the alternating units method, as described on page 285.
+                    </p>
+
+                    <h6>First Turn</h6>
+                    <p>
+                        Once deployment is complete, the winner of a roll-off takes
+                        the first turn. The player that finished deploying their army
+                        first adds +1 to their roll.
+                    </p>
+                    <h6>Game Length</h6>
+                    <p>
+                        Before the game begins, players can choose to play a ‘fixed’
+                        length game or a ‘random’ length game: Fixed Game Length: The battle will last for six rounds, until
+                        one side concedes, or until the time limit agreed by the players
+                        is reached, as described on page 286.
+                        Random Game Length: The battle will last a random number
+                        of rounds or until one side concedes. Starting at the end of the
+                        fifth round, roll a D6 at the end of each round. Add the round
+                        number to the dice roll. If the total is 10 or more, the battle
+                        ends immediately. If the total is less than 10 then the battle
+                        continues for at least one more round.
+                    </p>
+                    <h6>Scenario Special Rules</h6>
+                    <p>
+                        This scenario has no special rules.
+                    </p>
+                    <h6>Victory!</h6>
+                    <p>
+                        Once the battle has ended, use Victory Points to determine
+                        which player is the winner.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal dla THE DOOM OF ODO TODMEYER III -->
+    <div class="modal fade" id="Scenario2Modal" tabindex="-1" aria-labelledby="scenario1ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="scenario1ModalLabel">The doom of Odo Todmeyer III</h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <h6>Set-up</h6>
+                    <p>
+                        Place terrain as described in The Old World Rulebook (page 268).
+                    </p>
+
+                    <h6>Deployment</h6>
+                    <p>
+                        Once the battlefield has been set up, the winner of a roll-off
+                        chooses which player will deploy the first unit. The winner
+                        of this roll-off must also choose their deployment zone (A or
+                        B), as shown on the map opposite. Players deploy their armies
+                        using the alternating units method, as described on page 285.
+                    </p>
+
+                    <h6>First Turn</h6>
+                    <p>
+                        Once deployment is complete, the winner of a roll-off takes
+                        the first turn. The player that finished deploying their army
+                        first adds +1 to their roll.
+                    </p>
+                    <h6>Game Length</h6>
+                    <p>
+                        There is no turn limit for this scenario. Instead, the battle
+                        will last until one side reaches its ‘break point’ or until one
+                        side concedes.
+                    </p>
+                    <h6>Scenario Special Rules</h6>
+                    <p>
+                        Break Point: All armies have a breaking point. This is equal to
+                        a quarter (25%) of the total Unit Strength of the army at the
+                        start of the game. To calculate the break point of your army,
+                        simply add together the Unit Strength of every unit (including
+                        characters) in your muster list and divide the total by four,
+                        rounding fractions down.
+                        With each model removed from play as a casualty and with
+                        each unit destroyed, an army approaches its break point.
+                        If, during any Start of Turn sub-phase, the remaining Unit
+                        Strength of either army has fallen below its break point, that
+                        army is considered to have ‘broken’. At this point, the game
+                        ends as models begin to flee, crumble into dust, dematerialise,
+                        and so forth.
+                        (Note that units that have pursued a fleeing enemy off the
+                        battlefield and units held in reserve count as being on the battlefield
+                        for the purposes of determining whether or not an army has reached
+                        its break point).
+                    </p>
+                    <h6>Victory!</h6>
+                    <p>
+                        If the game ends with one army having broken, the unbroken
+                        army achieves a crushing victory. Should both armies fall
+                        below their break point at the same time, use Victory Points
+                        to determine which player is the winner, as described on
+                        page 286.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal dla The battle of Pine Crags -->
+    <div class="modal fade" id="Scenario3Modal" tabindex="-1" aria-labelledby="scenario1ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="scenario1ModalLabel">The battle of Pine Crags</h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <h6>Set-up</h6>
+                    <p>
+                        Place terrain as described in The Old World Rulebook (page 268).
+                    </p>
+
+                    <h6>Deployment</h6>
+                    <p>
+                        Once the battlefield has been set up, the winner of a roll-off
+                        chooses which player will deploy the first unit. The winner
+                        of this roll-off must also choose their deployment zone (A or
+                        B), as shown on the map opposite. Prior to deployment, both
+                        players secretly divide their armies into two forces – the main
+                        force and the flanking force:
+                        • A flanking force must contain at least one non-character
+                        unit and can be worth up to 33% of the total points value
+                        of the army (for example, in a 2,000 points game, your
+                        flanking force may be worth up to 666 points).
+                        • A flanking force may include characters, but cannot
+                        include the General.
+                        Once flanking forces have been selected, each player secretly
+                        makes a note of which flank (left or right) theirs will be
+                        deployed upon. Then, starting with the player that won the
+                        roll-off, the players deploy their main forces within their
+                        central deployment zone, using the alternating units method,
+                        as described on page 285.
+                        Finally, after both players have finished deploying their main
+                        forces, the players reveal where their flanking forces are to be
+                        deployed. Starting with the player that won the roll-off, the
+                        players deploy their flanking forces within their chosen 18"
+                        flank zone, using the alternating units method.
+                    </p>
+
+                    <h6>First Turn</h6>
+                    <p>
+                        Once deployment is complete, the winner of a roll-off takes
+                        the first turn.
+                    </p>
+                    <h6>Game Length</h6>
+                    <p>
+                        The battle will last for six rounds, until one side concedes,
+                        or until the time limit agreed by the players is reached, as
+                        described on page 286.
+                    </p>
+                    <h6>Scenario Special Rules</h6>
+                    <p>
+                        Other than the special deployment rules already given, this
+                        scenario has no special rules.
+                    </p>
+                    <h6>Victory!</h6>
+                    <p>
+                        Once the battle has ended, use Victory Points to determine
+                        which player is the winner.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Skrypt do zapisania ustawień w Local Storage -->
+    <script>
+
+        function updateScenario() {
+            const scenarioSelect = document.getElementById("scenario");
+            const selectedScenario = scenarioSelect.value;
+            const scenarioImage = document.getElementById("scenarioImage");
+
+            // Ustawiamy źródło obrazka na podstawie wybranego scenariusza
+            scenarioImage.src = `Jpg/${selectedScenario}.png`;
+            scenarioImage.style.display = "block"; // Wyświetl obrazek
+
+            const madalButton = document.getElementById("modalButton")
+            // Ustawiamy data-target na odpowiedni modal
+            modalButton.setAttribute("data-target", `#${selectedScenario}Modal`);
+
+        }
+
+
+        function saveGameSetup() {
+            // Pobieranie danych z formularza
+            const player1Name = document.getElementById("player1Name").value;
+            const player2Name = document.getElementById("player2Name").value;
+            const scenario = document.getElementById("scenario").value;
+
+            // Zapisanie danych do Local Storage
+            localStorage.setItem("player1", player1Name);
+            localStorage.setItem("player2", player2Name);
+            localStorage.setItem("scenario", scenario);
+
+            // Przejście do strony liczenia punktów
+            window.location.href = "score.html";
+        }
+    </script>
+
+    <!-- Importowanie skryptów Bootstrap (opcjonalne) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
