@@ -8,6 +8,17 @@
     <!-- Importowanie Bootstrap przez CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css">
+    <style>
+        body {
+            background-image: url('Jpg/Background1.jpg'); /* Ścieżka do obrazka */
+            background-size: cover; /* Aby obrazek wypełniał całe tło */
+            background-repeat: no-repeat; /* Aby obrazek się nie powtarzał */
+            background-position: center; /* Wyśrodkowanie obrazka */
+            background-attachment: fixed; /* Ustawienie tła jako statyczne */
+            min-height: 100vh; /* Umożliwia pokrycie całej wysokości widoku */
+        }
+    </style>
+
 
 </head>
 <body class="bg-light">
@@ -20,12 +31,12 @@
                 <!-- Sekcja dla Graczy -->
                 <div class="form-group">
                     <label for="player1Name">General 1:</label>
-                    <input type="text" id="player1Name" class="form-control" placeholder="Wprowadź imię Gracza 1" required value="You">
+                    <input type="text" id="player1Name" class="form-control" placeholder="Enter Player 1 name" required value="You">
                 </div>
 
                 <div class="form-group">
                     <label for="player2Name">General 2:</label>
-                    <input type="text" id="player2Name" class="form-control" placeholder="Wprowadź imię Gracza 2" required value="Your Enemy">
+                    <input type="text" id="player2Name" class="form-control" placeholder="Enter Player 2 name" required value="Your Enemy">
                 </div>
 
                 <!-- Wybór Scenariusza -->
@@ -36,9 +47,12 @@
                         <option value="Scenario1">The Plains of L’anguille</option>
                         <option value="Scenario2">The doom of Odo Todmeyer III</option>
                         <option value="Scenario3">The battle of Pine Crags</option>
-                    </select>                  
+                        <option value="Scenario4">The Drakwald Forest Incident</option>
+                        <option value="Scenario5">The Battle Of Gisoreux Gap</option>
+                        <option value="Scenario6">The Lonely Tower</option>
+                    </select>
                     <div class="text-center">
-                        <button type="button" id="modalButton" class="btn btn-link" data-toggle="modal" data-target="">
+                        <button type="button" id="modalButton" class="btn btn-link" data-bs-toggle="modal" data-bs-target="">
                             <i class="bi bi-eye-fill" style="font-size: 2rem; color: black;"></i> <!-- Możesz dostosować rozmiar ikony -->
                         </button>
                     </div>
@@ -61,7 +75,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="scenario1ModalLabel">The Plains of L’anguille</h5>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
 
@@ -109,7 +123,7 @@
                     </p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -121,7 +135,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="scenario1ModalLabel">The doom of Odo Todmeyer III</h5>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
 
@@ -181,7 +195,7 @@
                     </p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -193,7 +207,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="scenario1ModalLabel">The battle of Pine Crags</h5>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
 
@@ -252,11 +266,203 @@
                     </p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Modal dla THE DRAKWALD FOREST INCIDENT -->
+    <div class="modal fade" id="Scenario4Modal" tabindex="-1" aria-labelledby="scenario1ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="scenario1ModalLabel">The Drakwald Forest Incident</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <h6>Set-up</h6>
+                    <p>
+                        Place terrain as described in The Old World Rulebook (page 268).
+                    </p>
+
+                    <h6>Deployment</h6>
+                    <p>
+                        Once the battlefield has been set up, the winner of a roll-off
+                        chooses which player will deploy the first unit. The winner of
+                        this roll-off must also choose their deployment zone (A or B),
+                        as shown on the map opposite.
+                        Before deploying their army, each player rolls a D6 for each
+                        unit, including each character and war machine, in their army.
+                        On a roll of 1, the unit must be held back as reserves (see
+                        below). Once a roll has been made for each unit, those that
+                        are not held in reserve can be deployed. Players deploy their
+                        armies using the alternating units method, as described on
+                        page 285.
+                    </p>
+
+                    <h6>First Turn</h6>
+                    <p>
+                        Once deployment is complete, the winner of a roll-off takes
+                        the first turn. The player that finished deploying their army
+                        first adds +1 to their roll.
+                    </p>
+                    <h6>Game Length</h6>
+                    <p>
+                        The battle will last for six rounds, until one side concedes,
+                        or until the time limit agreed by the players is reached, as
+                        described on page 286.
+                    </p>
+                    <h6>Scenario Special Rules</h6>
+                    <p>
+                        Reserves: Reserves are not deployed at the start of the
+                        battle. Instead they can enter play during the Compulsory
+                        Moves sub-phase of any turn – other than the first – of their
+                        controlling player’s choosing. When they arrive, reserves may
+                        enter the battlefield from any point on the long battlefield edge
+                        within their deployment zone, and move on using the rules for
+                        reinforcements (as described on page 134).
+                    </p>
+                    <h6>Victory!</h6>
+                    <p>
+                        Once the battle has ended, use Victory Points to determine
+                        which player is the winner.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal dla  THE BATTLE OF GISOREUX GAP-->
+    <div class="modal fade" id="Scenario5Modal" tabindex="-1" aria-labelledby="scenario5ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="scenario1ModalLabel">The Battle Of Gisoreux Gap</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <h6>Set-up</h6>
+                    <p>
+                        Place terrain as described in The Old World Rulebook (page 268).
+                    </p>
+
+                    <h6>Deployment</h6>
+                    <p>
+                        Once the battlefield has been set up, the winner of a roll-off
+                        chooses which player will deploy the first unit. The winner
+                        of this roll-off must also choose their deployment zone (A or
+                        B), as shown on the map opposite. Players deploy their armies
+                        using the alternating units method, as described on page 285.
+                    </p>
+
+                    <h6>First Turn</h6>
+                    <p>
+                        Once deployment is complete, the winner of a roll-off takes
+                        the first turn. The player that finished deploying their army
+                        first adds +1 to their roll.
+                    </p>
+                    <h6>Game Length</h6>
+                    <p>
+                        The battle will last a random number of rounds or until one
+                        side concedes. Starting at the end of the fifth round, roll a D6
+                        at the end of each round. Add the round number to the dice
+                        roll. If the total is 10 or more, the battle ends immediately. If
+                        the total is less than 10 then the battle continues for at least
+                        one more round.
+                    </p>
+                    <h6>Scenario Special Rules</h6>
+                    <p>
+                        Bottleneck: The battle is fought in a narrow mountain pass
+                        enclosed by high cliffs. Because of this, the long battlefield
+                        edges count as impassable terrain. As such, no units (including
+                        fleeing units or any arriving from reserve) can leave or enter
+                        the battlefield via either long edge unless they have the
+                        Ethereal or Fly special rule.
+                    </p>
+                    <h6>Victory!</h6>
+                    <p>
+                        Once the battle has ended, use Victory Points to determine
+                        which player is the winner.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal dla  THE LONELY TOWER -->
+    <div class="modal fade" id="Scenario6Modal" tabindex="-1" aria-labelledby="scenario1ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="scenario1ModalLabel">The Lonely Tower</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <h6>Set-up</h6>
+                    <p>
+                        Place terrain as described on page 268. In addition, place a
+                        single special feature (as described on page 272) in the centre
+                        of the battlefield (players should agree which special feature to
+                        use from the terrain available).
+                    </p>
+
+                    <h6>Deployment</h6>
+                    <p>
+                        Once the battlefield has been set up, the winner of a roll-off
+                        chooses which player will deploy the first unit. The winner
+                        of this roll-off must also choose their deployment zone (A or
+                        B), as shown on the map opposite. Players deploy their armies
+                        using the alternating units method, as described on page 285.
+                    </p>
+
+                    <h6>First Turn</h6>
+                    <p>
+                        Once deployment is complete, the winner of a roll-off takes
+                        the first turn. The player that finished deploying their army
+                        first adds +1 to their roll.
+                    </p>
+                    <h6>Game Length</h6>
+                    <p>
+                        Before the game begins, players can choose to play a ‘fixed’
+                        length game or a ‘random’ length game: Fixed Game Length: The battle will last for six rounds, until
+                        one side concedes, or until the time limit agreed by the players
+                        is reached, as described on page 286.
+                        Random Game Length: The battle will last a random number
+                        of rounds or until one side concedes. Starting at the end of the
+                        fifth round, roll a D6 at the end of each round. Add the round
+                        number to the dice roll. If the total is 10 or more, the battle
+                        ends immediately. If the total is less than 10 then the battle
+                        continues for at least one more round.
+                    </p>
+                    <h6>Scenario Special Rules</h6>
+                    <p>
+                        This scenario has no special rules.
+                    </p>
+                    <h6>Victory!</h6>
+                    <p>
+                        Once the battle has ended, use Victory Points to determine
+                        which player is the winner, as described on page 286. The
+                        player that controls the special feature at the end of the battle
+                        wins a bonus of 200 Victory Points (in addition to any bonus
+                        controlling the special feature may normally give).
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Skrypt do zapisania ustawień w Local Storage -->
     <script>
@@ -272,9 +478,10 @@
 
             const madalButton = document.getElementById("modalButton")
             // Ustawiamy data-target na odpowiedni modal
-            modalButton.setAttribute("data-target", `#${selectedScenario}Modal`);
+            modalButton.setAttribute("data-bs-target", `#${selectedScenario}Modal`);
 
         }
+
 
 
         function saveGameSetup() {
@@ -293,9 +500,7 @@
         }
     </script>
 
-    <!-- Importowanie skryptów Bootstrap (opcjonalne) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Importowanie skryptów Bootstrap (zgodna wersja) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
