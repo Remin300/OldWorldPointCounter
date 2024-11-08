@@ -29,26 +29,29 @@
                 </button>
             </div>
             <hr class="mt-2" />
-            <form id="ScoreForm" class="col-md-12 p-4 mt-5 bg-white  rounded shadow border border-2 border-secondary">
+            <form id="ScoreForm" class="col-md-4 p-4 mt-5 bg-white mx-auto rounded shadow border border-2 border-secondary">
                 <h4 class="text-center mb-4">Score</h4>
-                <div class="col-md-3 mx-auto">
+                <div class="col-md-12 mx-auto mb-2">
                     <select id="countingType" class="form-control" required onchange="updatePoints()">
                         <option value="Official">Official counter (TOW manual)</option>
                         <option value="Tournament">Tournament counter</option>
-
                     </select>
                 </div>
-                <div class="row mt-4">
-                    <div class="col-md-6">
+                <div class="col-md-12 mx-auto mb-2 d-none" id="BattlePointsDiv">
+                    <label class="form-label" for="BattlePoints">How many points are you playing for?</label>
+                    <input type="number" id="BattlePoints" class="form-control" required oninput="updatePoints()" value="1500">
+                </div>
+                <div class="row mt-4 mx-auto ">
+                    <div class="col-6 mx-auto">
                         <div class="d-flex align-items-center">
                             <label for="player1Points" id="ptsNamePlayer1" class="form-label me-2"></label>
                             <div class="form-control-plaintext" id="player1Points">0</div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-6 mx-auto">
                         <div class="d-flex align-items-center">
                             <label for="player2Points" id="ptsNamePlayer2" class="form-label me-2"></label>
-                            <div class="form-control-plaintext" id="player2Points">0</div>
+                            <div class="form-control-plaintext " id="player2Points">0</div>
                         </div>
                     </div>
                 </div>
@@ -60,66 +63,83 @@
             <div class="row mb-4">
                 <!-- Nowy wiersz dla form -->
                 <form id="player1Form" class="col-md-6 p-4 mt-5 bg-white  rounded shadow border border-2 border-secondary">
-                    <h3 id="player1Display"></h3>
 
+                    <div class="d-flex justify-content-center align-items-center mb-4">
+                        <h3 id="player1Display" class="text-center"></h3>
+                    </div>
                     <div class="d-flex align-items-center mb-2 d-none" id="SpcFtrPlayer1">
                         <label class="form-label me-2" for="SpecialFeaturePlayer1">Controls the special feature</label>
                         <input type="checkbox" id="SpecialFeaturePlayer1" onchange="updatePoints()">
                     </div>
 
                     <div class="d-flex align-items-center mb-2">
-                        <label class="form-label me-2" for="GeneralSlainPlayer1">General (slain, has fled or fleeing)</label>
+                        <label class="form-label me-2" for="GeneralSlainPlayer1">Enemy General (slain, has fled or fleeing)</label>
                         <input type="checkbox" id="GeneralSlainPlayer1" onchange="updatePoints()">
                     </div>
 
                     <div class="d-flex align-items-center mb-2">
-                        <label class="form-label me-2" for="BsbPlayer1">Battle Standard Bearer (slain, has fled or fleeing)</label>
+                        <label class="form-label me-2" for="BsbPlayer1">Enemy Battle Standard Bearer (slain, has fled or fleeing)</label>
                         <input type="checkbox" id="BsbPlayer1" onchange="updatePoints()">
                     </div>
 
                     <div class="d-flex align-items-center mb-2">
-                        <label class="form-label me-2" for="StandardsPlayer1">Number of standards lost</label>
+                        <label class="form-label me-2" for="StandardsPlayer1">Number of enemy standard claimed as a trophy</label>
                         <input type="number" id="StandardsPlayer1" class="form-control w-25" required oninput="updatePoints()">
                     </div>
 
                     <hr class="mt-2" />
 
+                    <div class="d-flex justify-content-center align-items-center mb-4">
+                        <label class="form-label me-2">Enemy Units (Destroyed/Fleeing/25% Str) </label>
+                    </div>
+
                     <div id="player1Units" class="mt-3"></div>
-                    <button type="button" class="btn btn-link" onclick="addUnit('player1')">
-                        <i class="bi bi-plus-square-fill" style="font-size: 2rem; color: black;"></i>
-                    </button>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <button type="button" class="btn btn-link" onclick="addUnit('player1')">
+                            <i class="bi bi-plus-square-fill" style="font-size: 2rem; color: black;"></i>
+                        </button>
+                    </div>
                 </form>
 
 
                 <form id="player2Form" class="col-md-6 p-4 mt-5 bg-white rounded shadow border border-2 border-secondary">
-                    <h3 id="player2Display"></h3>
 
+                    <div class="d-flex justify-content-center align-items-center mb-4">
+                        <h3 id="player2Display" class="text-center"></h3>
+                    </div>
                     <div class="d-flex align-items-center mb-2 d-none" id="SpcFtrPlayer2">
                         <label class="form-label me-2" for="SpecialFeaturePlayer2">Controls the special feature</label>
                         <input type="checkbox" id="SpecialFeaturePlayer2" onchange="updatePoints()">
                     </div>
 
                     <div class="d-flex align-items-center mb-2">
-                        <label class="form-label me-2" for="GeneralSlainPlayer2">General (slain, has fled or fleeing)</label>
+                        <label class="form-label me-2" for="GeneralSlainPlayer2">Enemy General (slain, has fled or fleeing)</label>
                         <input type="checkbox" id="GeneralSlainPlayer2" onchange="updatePoints()">
                     </div>
 
                     <div class="d-flex align-items-center mb-2">
-                        <label class="form-label me-2" for="BsbPlayer2">Battle Standard Bearer (slain, has fled or fleeing)</label>
+                        <label class="form-label me-2" for="BsbPlayer2">Enemy Battle Standard Bearer (slain, has fled or fleeing)</label>
                         <input type="checkbox" id="BsbPlayer2" onchange="updatePoints()">
                     </div>
 
                     <div class="d-flex align-items-center mb-2">
-                        <label class="form-label me-2" for="StandardsPlayer2">Number of standards lost</label>
+                        <label class="form-label me-2" for="StandardsPlayer2">Number of enemy standard claimed as a trophy</label>
                         <input type="number" id="StandardsPlayer2" class="form-control w-25" required oninput="updatePoints()">
                     </div>
 
                     <hr class="mt-2" />
 
-                    <div id="player2Units" class="mt-3"></div>
-                    <button type="button" class="btn btn-link" onclick="addUnit('player2')">
-                        <i class="bi bi-plus-square-fill" style="font-size: 2rem; color: black;"></i>
-                    </button>
+
+                    <div class="d-flex justify-content-center align-items-center mb-4">
+                        <label class="form-label me-2">Enemy Units (Destroyed/Fleeing/25% Str) </label>
+                    </div>
+
+                    <div id="player2Units" class="mt-3  "></div>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <button type="button" class="btn btn-link" onclick="addUnit('player2')">
+                            <i class="bi bi-plus-square-fill" style="font-size: 2rem; color: black;"></i>
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -543,8 +563,8 @@
         <script>
             window.onload = function () {
                 // Pobieranie danych z Local Storage
-                const player1Name = localStorage.getItem("player1");
-                const player2Name = localStorage.getItem("player2");
+                window.player1Name = localStorage.getItem("player1");
+                window.player2Name = localStorage.getItem("player2");
                 const scenario = localStorage.getItem("scenario");
                 let scenarioTitle;
                 if (scenario === "Scenario1") {
@@ -572,7 +592,6 @@
 
 
 
-
                 // Wyświetlanie danych na stronie
                 document.getElementById("player1Display").textContent = player1Name;
                 document.getElementById("player2Display").textContent = player2Name;
@@ -581,8 +600,8 @@
                 const modal = document.getElementById("modalButton");
                 modal.setAttribute("data-bs-target", `#${scenario}Modal`);
 
-                document.getElementById("ptsNamePlayer1").textContent = player1Name + " (Pts): ";
-                document.getElementById("ptsNamePlayer2").textContent = player2Name + " (Pts): ";
+                document.getElementById("ptsNamePlayer1").textContent = player1Name + ": ";
+                document.getElementById("ptsNamePlayer2").textContent = player2Name + ": ";
             };
 
             function addUnit(player) {
@@ -592,26 +611,26 @@
 
                 // Tworzenie formularza dla jednostki
                 unitDiv.innerHTML = `
-                                                    <div class="col-md-1 text-center">
-                                                        <button type="button" class="btn btn-link" onclick="removeUnit(this)"><i class="bi bi-trash3-fill" style="color: black;"></i></button>
-                                                    </div>
-                                                    <div class="col-md-5">
-                                                        <input type="text" class="form-control unit-name" placeholder="Unit name" required>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <input type="number" class="form-control unit-points" placeholder="Pts" required>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <select class="form-select unit-state" onchange="updatePoints()">
-                                                            <option value="" hidden>Unit state</option>
-                                                            <option value="destroyed">Destroyed</option>
-                                                            <option value="fleeing">Fleeing</option>
-                                                            <option value="25%">25% Str</option>
-                                                            <option value="OK">Alive</option>
-                                                        </select>
-                                                    </div>
-                                                    <hr class="mt-3" />
-                                                `;
+                                                                    <div class="col-md-1 text-center">
+                                                                        <button type="button" class="btn btn-link" onclick="removeUnit(this)"><i class="bi bi-trash3-fill" style="color: black;"></i></button>
+                                                                    </div>
+                                                                    <div class="col-md-5">
+                                                                        <input type="text" class="form-control unit-name" placeholder="Unit name" required>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <input type="number" class="form-control unit-points" placeholder="Pts" required oninput="updatePoints()">
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <select class="form-select unit-state" onchange="updatePoints()">
+                                                                            <option value="" hidden>Unit state</option>
+                                                                            <option value="destroyed">Destroyed</option>
+                                                                            <option value="fleeing">Fleeing</option>
+                                                                            <option value="25%">25% Str</option>
+                                                                            <option value="OK">Alive</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <hr class="mt-3" />
+                                                                `;
 
                 unitsDiv.appendChild(unitDiv);
             }
@@ -629,23 +648,23 @@
                     const points = parseInt(pointsInput.value) || 0;
 
                     if (stateSelect.value === 'destroyed') {
-                        player2TotalPoints += points;
+                        player1TotalPoints += points;
                     } else if (stateSelect.value === 'fleeing') {
-                        player2TotalPoints += points * 0.5;
+                        player1TotalPoints += points * 0.5;
                     } else if (stateSelect.value === '25%') {
-                        player2TotalPoints += points * 0.25;
+                        player1TotalPoints += points * 0.25;
                     } else if (stateSelect.value === 'OK') { }
 
                 }
 
                 const player1General = document.getElementById('GeneralSlainPlayer1');
                 if (player1General.checked) {
-                    player2TotalPoints += 100;
+                    player1TotalPoints += 100;
                 }
 
                 const player1Bsb = document.getElementById('BsbPlayer1');
                 if (player1Bsb.checked) {
-                    player2TotalPoints += 50;
+                    player1TotalPoints += 50;
                 }
 
 
@@ -656,7 +675,7 @@
 
                 const StandardsPlayer1 = document.getElementById('StandardsPlayer1');
                 const standardsPlayer1Value = parseInt(StandardsPlayer1.value) || 0;
-                player2TotalPoints += standardsPlayer1Value * 50;
+                player1TotalPoints += standardsPlayer1Value * 50;
 
 
                 // Zliczanie punktów dla Gracza 2
@@ -668,22 +687,22 @@
                     const points = parseInt(pointsInput.value) || 0;
 
                     if (stateSelect.value === 'destroyed') {
-                        player1TotalPoints += points;
+                        player2TotalPoints += points;
                     } else if (stateSelect.value === 'fleeing') {
-                        player1TotalPoints += points * 0.5;
+                        player2TotalPoints += points * 0.5;
                     } else if (stateSelect.value === '25%') {
-                        player1TotalPoints += points * 0.25;
+                        player2TotalPoints += points * 0.25;
                     } else if (stateSelect.value === 'OK') { }
                 }
 
                 const player2General = document.getElementById('GeneralSlainPlayer2');
                 if (player2General.checked) {
-                    player1TotalPoints += 100;
+                    player2TotalPoints += 100;
                 }
 
                 const player2Bsb = document.getElementById('BsbPlayer2');
                 if (player2Bsb.checked) {
-                    player1TotalPoints += 50;
+                    player2TotalPoints += 50;
                 }
 
                 const SpecialFeaturePlayer2 = document.getElementById('SpecialFeaturePlayer2');
@@ -693,12 +712,13 @@
 
                 const StandardsPlayer2 = document.getElementById('StandardsPlayer2');
                 const standardsPlayer2Value = parseInt(StandardsPlayer2.value) || 0;
-                player1TotalPoints += standardsPlayer2Value * 50;
+                player2TotalPoints += standardsPlayer2Value * 50;
+
 
 
                 // Uaktualnienie punktów w UI
-                document.getElementById('player1Points').innerText = player1TotalPoints;
-                document.getElementById('player2Points').innerText = player2TotalPoints;
+                document.getElementById('player1Points').innerText = player1TotalPoints.toString();
+                document.getElementById('player2Points').innerText = player2TotalPoints.toString();
 
 
                 const player1Name = localStorage.getItem("player1");
@@ -709,6 +729,8 @@
                 // Sprawdzamy, czy wybrano "Official"
                 const countingType = document.getElementById('countingType').value;
                 if (countingType === "Official") {
+
+                    document.getElementById('BattlePointsDiv').classList.add('d-none');
 
                     if ((player1TotalPoints - player2TotalPoints) >= 100) {
                         document.getElementById('battleResult').innerText = player1Name + ' - VICTORY!';
@@ -726,78 +748,85 @@
                         document.getElementById('battleResult').innerText = 'Draw';
                     }
                 }
-                else {
+                else if (countingType === "Tournament") {
+                    document.getElementById('BattlePointsDiv').classList.remove('d-none');
+
+                    let PointLimit = document.getElementById('BattlePoints').value
+
+
                     if (player1TotalPoints > player2TotalPoints) {
+
                         let substract1 = player1TotalPoints - player2TotalPoints
 
-                        if (substract1 <= 150) {
+                        if (substract1 <= PointLimit * 0.1) {
                             document.getElementById('battleResult').innerText = player1Name + ' 10 : 10 ' + player2Name;
                         }
-                        else if (substract1 > 150 && substract1 <= 300) {
+                        else if (substract1 > PointLimit * 0.1 && substract1 <= PointLimit * 0.2) {
                             document.getElementById('battleResult').innerText = player1Name + ' 11 : 9 ' + player2Name;
                         }
-                        else if (substract1 > 300 && substract1 <= 450) {
+                        else if (substract1 > PointLimit * 0.2 && substract1 <= PointLimit * 0.3) {
                             document.getElementById('battleResult').innerText = player1Name + ' 12 : 8 ' + player2Name;
                         }
-                        else if (substract1 > 450 && substract1 <= 600) {
+                        else if (substract1 > PointLimit * 0.3 && substract1 <= PointLimit * 0.4) {
                             document.getElementById('battleResult').innerText = player1Name + ' 13 : 7 ' + player2Name;
                         }
-                        else if (substract1 > 600 && substract1 <= 750) {
+                        else if (substract1 > PointLimit * 0.4 && substract1 <= PointLimit * 0.5) {
                             document.getElementById('battleResult').innerText = player1Name + ' 14 : 6 ' + player2Name;
                         }
-                        else if (substract1 > 750 && substract1 <= 900) {
+                        else if (substract1 > PointLimit * 0.5 && substract1 <= PointLimit * 0.6) {
                             document.getElementById('battleResult').innerText = player1Name + ' 15 : 5 ' + player2Name;
                         }
-                        else if (substract1 > 900 && substract1 <= 1050) {
+                        else if (substract1 > PointLimit * 0.6 && substract1 <= PointLimit * 0.7) {
                             document.getElementById('battleResult').innerText = player1Name + ' 16 : 4 ' + player2Name;
                         }
-                        else if (substract1 > 1050 && substract1 <= 1200) {
+                        else if (substract1 > PointLimit * 0.7 && substract1 <= PointLimit * 0.8) {
                             document.getElementById('battleResult').innerText = player1Name + ' 17 : 3 ' + player2Name;
                         }
-                        else if (substract1 > 1200 && substract1 <= 1350) {
+                        else if (substract1 > PointLimit * 0.8 && substract1 <= PointLimit * 0.9) {
                             document.getElementById('battleResult').innerText = player1Name + ' 18 : 2 ' + player2Name;
                         }
-                        else if (substract1 > 1350 && substract1 <= 1500) {
+                        else if (substract1 > PointLimit * 0.9 && substract1 <= PointLimit) {
                             document.getElementById('battleResult').innerText = player1Name + ' 19 : 1 ' + player2Name;
                         }
-                        else if (substract1 > 1500) {
+                        else if (substract1 > PointLimit) {
                             document.getElementById('battleResult').innerText = player1Name + ' 20 : 0 ' + player2Name;
                         }
                     }
                     else if (player2TotalPoints > player1TotalPoints) {
+
                         let substract2 = player2TotalPoints - player1TotalPoints
 
-                        if (substract2 <= 150) {
+                        if (substract2 <= PointLimit * 0.1) {
                             document.getElementById('battleResult').innerText = player1Name + ' 10 : 10 ' + player2Name;
                         }
-                        else if (substract2 > 150 && substract2 <= 300) {
+                        else if (substract2 > PointLimit * 0.1 && substract2 <= PointLimit * 0.2) {
                             document.getElementById('battleResult').innerText = player1Name + ' 9 : 11 ' + player2Name;
                         }
-                        else if (substract2 > 300 && substract2 <= 450) {
+                        else if (substract2 > PointLimit * 0.2 && substract2 <= PointLimit * 0.3) {
                             document.getElementById('battleResult').innerText = player1Name + ' 8 : 12 ' + player2Name;
                         }
-                        else if (substract2 > 450 && substract2 <= 600) {
+                        else if (substract2 > PointLimit * 0.3 && substract2 <= PointLimit * 0.4) {
                             document.getElementById('battleResult').innerText = player1Name + ' 7 : 13 ' + player2Name;
                         }
-                        else if (substract2 > 600 && substract2 <= 750) {
+                        else if (substract2 > PointLimit * 0.4 && substract2 <= PointLimit * 0.5) {
                             document.getElementById('battleResult').innerText = player1Name + ' 6 : 14 ' + player2Name;
                         }
-                        else if (substract2 > 750 && substract2 <= 900) {
+                        else if (substract2 > PointLimit * 0.5 && substract2 <= PointLimit * 0.6) {
                             document.getElementById('battleResult').innerText = player1Name + ' 5 : 15 ' + player2Name;
                         }
-                        else if (substract2 > 900 && substract2 <= 1050) {
+                        else if (substract2 > PointLimit * 0.6 && substract2 <= PointLimit * 0.7) {
                             document.getElementById('battleResult').innerText = player1Name + ' 4 : 16 ' + player2Name;
                         }
-                        else if (substract2 > 1050 && substract2 <= 1200) {
+                        else if (substract2 > PointLimit * 0.7 && substract2 <= PointLimit * 0.8) {
                             document.getElementById('battleResult').innerText = player1Name + ' 3 : 17 ' + player2Name;
                         }
-                        else if (substract2 > 1200 && substract2 <= 1350) {
+                        else if (substract2 > PointLimit * 0.8 && substract2 <= PointLimit * 0.9) {
                             document.getElementById('battleResult').innerText = player1Name + ' 2 : 18 ' + player2Name;
                         }
-                        else if (substract2 > 1350 && substract2 <= 1500) {
+                        else if (substract2 > PointLimit * 0.9 && substract2 <= PointLimit) {
                             document.getElementById('battleResult').innerText = player1Name + ' 1 : 19 ' + player2Name;
                         }
-                        else if (substract2 > 1500) {
+                        else if (substract2 > PointLimit) {
                             document.getElementById('battleResult').innerText = player1Name + ' 0 : 20 ' + player2Name;
                         }
                     }
