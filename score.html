@@ -43,15 +43,17 @@
                 </div>
                 <div class="row mt-4 mx-auto ">
                     <div class="col-6 mx-auto">
-                        <div class="d-flex align-items-center">
-                            <label for="player1Points" id="ptsNamePlayer1" class="form-label me-2"></label>
-                            <div class="form-control-plaintext" id="player1Points">0</div>
+                        <div class="d-flex flex-column align-items-center">
+                            <label for="player1Points" id="ptsNamePlayer1" class="form-label mb-1 text-center text-wrap" 
+                                   style="white-space: normal; word-wrap: break-word; max-width: 120px; display: block;"></label>
+                            <div class="form-control-plaintext fw-bold fs-4 text-center" id="player1Points">0</div>
                         </div>
                     </div>
                     <div class="col-6 mx-auto">
-                        <div class="d-flex align-items-center">
-                            <label for="player2Points" id="ptsNamePlayer2" class="form-label me-2"></label>
-                            <div class="form-control-plaintext " id="player2Points">0</div>
+                        <div class="d-flex flex-column align-items-center">
+                            <label for="player2Points" id="ptsNamePlayer2" class="form-label mb-1 text-center text-wrap" 
+                                 style="white-space: normal; word-wrap: break-word; max-width: 120px; display: block;"></label>
+                            <div class="form-control-plaintext fw-bold fs-4 text-center" id="player2Points">0</div>
                         </div>
                     </div>
                 </div>
@@ -90,7 +92,7 @@
                     <hr class="mt-2" />
 
                     <div class="d-flex justify-content-center align-items-center mb-4">
-                        <label class="form-label me-2">Enemy Units (Destroyed/Fleeing/25% Str) </label>
+                        <label class="form-label me-2">Units (Destroyed/Fleeing/25% Str) </label>
                     </div>
 
                     <div id="player1Units" class="mt-3"></div>
@@ -131,7 +133,7 @@
 
 
                     <div class="d-flex justify-content-center align-items-center mb-4">
-                        <label class="form-label me-2">Enemy Units (Destroyed/Fleeing/25% Str) </label>
+                        <label class="form-label me-2">Units (Destroyed/Fleeing/25% Str) </label>
                     </div>
 
                     <div id="player2Units" class="mt-3  "></div>
@@ -640,7 +642,7 @@
                 let player2TotalPoints = 0;
 
                 // Zliczanie punktów dla Gracza 1
-                const player1Units = document.getElementById('player1Units').getElementsByClassName('row');
+                const player1Units = document.getElementById('player2Units').getElementsByClassName('row');
                 for (let unit of player1Units) {
                     const pointsInput = unit.querySelector('.unit-points');
                     const stateSelect = unit.querySelector('.unit-state');
@@ -679,7 +681,7 @@
 
 
                 // Zliczanie punktów dla Gracza 2
-                const player2Units = document.getElementById('player2Units').getElementsByClassName('row');
+                const player2Units = document.getElementById('player1Units').getElementsByClassName('row');
                 for (let unit of player2Units) {
                     const pointsInput = unit.querySelector('.unit-points');
                     const stateSelect = unit.querySelector('.unit-state');
